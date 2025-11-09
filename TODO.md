@@ -1,0 +1,4 @@
+- [x] Add console debugging to js/app.js
+- [x] Add console debugging to js/auth.js
+- [x] Add console debugging to js/jwt.js
+- [x] Add console debugging to js/ui/auth.js
