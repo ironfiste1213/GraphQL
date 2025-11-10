@@ -1,4 +1,7 @@
 import { Api } from "./api.js";
+import { renderLogin } from "./ui/auth.js";
+import { clearPreviousUI } from "./ui/clear.js";
+import { renderProfile } from "./ui/profile.js";
 console.log("Auth.js loaded");
 
 export let Token = null;
@@ -21,8 +24,18 @@ export async function handellogin(a, b) {
         if (!response.ok) throw new Error("Invalid credentials");
         Token = await response.json();
         console.log("Token received and set:", Token);
+        clearPreviousUI();
+        renderProfile();
+
      } catch (error) {
         console.error("Login failed:", error);
         throw error;
      }
+}
+
+
+export function logout() {
+   Token = null;
+   clearPreviousUI()
+   renderLogin();
 }
