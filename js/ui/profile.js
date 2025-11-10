@@ -1,24 +1,29 @@
 import { logout } from '../auth.js';
 import { clearPreviousUI } from './clear.js';
+import { fetchlogin } from '../query.js';
 
-export function renderProfile() {
+export async function renderProfile() {
     clearPreviousUI();
-    const appdiv = document.getElementById("app")
+    const appdiv = document.getElementById("app");
     // Create nav bar
     const nav = document.createElement('nav');
 
-    // Add profile title
-    const title = document.createElement('h1');
-    title.textContent = 'Profile';
-    nav.appendChild(title);
+    // Fetch login data
+    const login = await fetchlogin();
 
-    // Add logout button
+    // Add login data on left
+    const loginDiv = document.createElement('div');
+    loginDiv.textContent = `WELCOME ${login}`;
+    loginDiv.classList.add('nav-left');
+    nav.appendChild(loginDiv);
+
+    // Add logout button on right
     const logoutBtn = document.createElement('button');
     logoutBtn.textContent = 'Logout';
+    logoutBtn.classList.add('nav-right');
     logoutBtn.addEventListener('click', (e) => {
         e.preventDefault();
         logout();
-        
     });
     nav.appendChild(logoutBtn);
 

@@ -5,34 +5,33 @@ import { renderProfile } from "./ui/profile.js";
 import { fetchlogin } from "./query.js";
 console.log("Auth.js loaded");
 
-export let Token = null;
 console.log("Token initialized as null");
 
 export async function handellogin(a, b) {
-    console.log("handellogin called with username:", a, "and password length:", b.length);
-    // check for valid value !!!!
+   console.log("handellogin called with username:", a, "and password length:", b.length);
+   // check for valid value !!!!
 
-    const credentials = btoa(`${a}:${b}`);
-    console.log("Credentials encoded");
-     try {
-        console.log("Fetching login API:", Api.login);
-        const response = await fetch(Api.login, {
-            method: "POST" ,
-            headers: {Authorization: `Basic ${credentials}`}
-        });
-        console.log("Response received, status:", response.status);
+   const credentials = btoa(`${a}:${b}`);
+   console.log("Credentials encoded");
+   try {
+      console.log("Fetching login API:", Api.login);
+      const response = await fetch(Api.login, {
+         method: "POST",
+         headers: { Authorization: `Basic ${credentials}` }
+      });
+      console.log("Response received, status:", response.status);
+²
+      if (!response.ok) throw new Error("Invalid credentials");
+      const token = await response.json();
+      console.log("Token received and set:", token);
+      return token
+      //   clearPreviousUI();
+      //   await renderProfile();
 
-        if (!response.ok) throw new Error("Invalid credentials");
-        Token = await response.json();
-        console.log("Token received and set:", Token);
-        clearPreviousUI();
-        renderProfile();
-        fetchlogin();
-
-     } catch (error) {
-        console.error("Login failed:", error);
-        throw error;
-     }
+   } catch (error) {
+      console.error("Login failed:", error);
+      throw error;
+   }
 }
 
 

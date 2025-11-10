@@ -17,5 +17,5 @@ export async function fetchlogin() {
     })
     if (!response.ok) throw Error('failed to fetch data user login ')
     const result = await response.json();
-    console.log(result.data.user[0]);
+    return result.data.user[0].login;
 }
