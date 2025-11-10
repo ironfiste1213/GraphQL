@@ -2,6 +2,7 @@ import { Api } from "./api.js";
 import { renderLogin } from "./ui/auth.js";
 import { clearPreviousUI } from "./ui/clear.js";
 import { renderProfile } from "./ui/profile.js";
+import { fetchlogin } from "./query.js";
 console.log("Auth.js loaded");
 
 export let Token = null;
@@ -26,6 +27,7 @@ export async function handellogin(a, b) {
         console.log("Token received and set:", Token);
         clearPreviousUI();
         renderProfile();
+        fetchlogin();
 
      } catch (error) {
         console.error("Login failed:", error);
