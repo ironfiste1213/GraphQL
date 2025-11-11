@@ -1,8 +1,7 @@
-import { renderLogin } from "./ui/auth.js";
-import { Api } from "./api.js";
+import { initializeApp } from "./lunch.js";
 console.log("App.js loaded");
 
 window.addEventListener('DOMContentLoaded', () => {
-    console.log("DOMContentLoaded event fired");
-    renderLogin();
+    console.log("DOM fully loaded and parsed");
+    initializeApp();
 });

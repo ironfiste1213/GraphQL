@@ -5,3 +5,5 @@ export const Api = {
     graphQl : "https://learn.zone01oujda.ma/api/graphql-engine/v1/graphql",
 }
 console.log("API endpoints defined:", Api);
+
+export const Token = null;

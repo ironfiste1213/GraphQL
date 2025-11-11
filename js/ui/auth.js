@@ -1,10 +1,12 @@
 import { handellogin } from "../auth.js";
+import { clearPreviousUI } from "./clear.js";
 console.log("UI/Auth.js loaded");
 
 const appDiv = document.getElementById('app');
 console.log("App div retrieved:", appDiv ? "found" : "not found");
 
 export function renderLogin() {
+    clearPreviousUI();
     console.log("renderLogin function called");
     if (appDiv) {
         appDiv.innerHTML = ``
@@ -33,12 +35,6 @@ export function renderLogin() {
     const submitButton = document.createElement('button');
     submitButton.type = 'submit';
     submitButton.textContent = 'Login';
-    form.addEventListener('submit', (e) => {
-        console.log("Form submit event triggered");
-        e.preventDefault();
-        console.log("Calling handellogin with values");
-        handellogin(emailInput.value, passwordInput.value);
-    });
     form.appendChild(submitButton);
     console.log("Submit button added to form");
     const errorDiv = document.createElement('div');

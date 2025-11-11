@@ -1,8 +1,7 @@
 import { Api } from "./api.js";
 import { renderLogin } from "./ui/auth.js";
-import { clearPreviousUI } from "./ui/clear.js";
-import { renderProfile } from "./ui/profile.js";
-import { fetchlogin } from "./query.js";
+import { removetoken } from "./jwt.js";
+import { initializeApp } from "./lunch.js";
 console.log("Auth.js loaded");
 
 console.log("Token initialized as null");
@@ -20,7 +19,7 @@ export async function handellogin(a, b) {
          headers: { Authorization: `Basic ${credentials}` }
       });
       console.log("Response received, status:", response.status);
-²
+
       if (!response.ok) throw new Error("Invalid credentials");
       const token = await response.json();
       console.log("Token received and set:", token);
@@ -36,7 +35,6 @@ export async function handellogin(a, b) {
 
 
 export function logout() {
-   Token = null;
-   clearPreviousUI()
-   renderLogin();
+removetoken();
+   initializeApp();
 }

@@ -3,7 +3,7 @@ console.log("JWT.js loaded");
 export function savetoken(token) {
     console.log("Saving token to localStorage");
     localStorage.setItem('jwt_token', token);
-    console.log("Token saved");
+    console.log("Token saved", token);
 }
 
 export function gettoken() {
