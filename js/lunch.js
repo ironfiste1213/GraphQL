@@ -3,6 +3,7 @@ import { handellogin } from "./auth.js";
 import { renderProfile } from "./ui/profile.js";
 import { fetchlogin } from "./query.js";
 import { gettoken, savetoken, isValid } from "./jwt.js";
+import { userData } from "./api.js";
 
 
 export async function initializeApp() {
@@ -11,6 +12,13 @@ export async function initializeApp() {
     if (isValid(token)) {
         console.log("Valid token found, proceeding to profile rendering.");
         // Token is valid, render profile
+        if (!userData) {
+            console.log("fetchdata user from init");
+            
+           await fetchlogin();
+        }
+        console.log("-----------renderLogin from initi");
+                
         renderProfile();
         // await renderProfile();
     } else {
@@ -28,8 +36,8 @@ export async function initializeApp() {
                 const tokenResponse = await handellogin(emailInput.value, passwordInput.value);
                 savetoken(tokenResponse);
                 console.log("Login successful, token saved.", tokenResponse);
-                const datauser = await fetchlogin();
-                 renderProfile(datauser);
+                 fetchlogin();
+                 renderProfile();
             } catch (error) {
                 console.error("Login failed in lunch.js:", error);
                 alert("Login failed: " + error.message);
