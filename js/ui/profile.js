@@ -1,19 +1,22 @@
 import { logout } from '../auth.js';
 import { clearPreviousUI } from './clear.js';
 import { fetchlogin } from '../query.js';
+import { userData } from '../api.js';
 
-export async function renderProfile() {
+export async function renderProfile(data) {
     clearPreviousUI();
     const appdiv = document.getElementById("app");
     // Create nav bar
     const nav = document.createElement('nav');
 
     // Fetch login data
-    const login = await fetchlogin();
+   
 
     // Add login data on left
     const loginDiv = document.createElement('div');
-    loginDiv.textContent = `WELCOME ${login}`;
+    loginDiv.textContent = `WELCOME ${data.login} your auditration is : ${data.auditRatio}`;
+    console.log(data.login);
+    
     loginDiv.classList.add('nav-left');
     nav.appendChild(loginDiv);
 

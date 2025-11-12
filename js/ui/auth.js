@@ -1,4 +1,3 @@
-import { handellogin } from "../auth.js";
 import { clearPreviousUI } from "./clear.js";
 console.log("UI/Auth.js loaded");
 

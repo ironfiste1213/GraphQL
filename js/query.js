@@ -1,9 +1,8 @@
-import { Api } from "./api.js";
+import { Api, QUERY, userData } from "./api.js";
 import { gettoken } from "./jwt.js";
 export async function fetchlogin() {
     const Token = gettoken();
     try {
-
         console.log("token in fetchlogin:", Token);
         const response = await fetch(Api.graphQl, {
             method: 'POST',
@@ -12,17 +11,14 @@ export async function fetchlogin() {
                 Authorization: `Bearer ${Token}`
             },
             body: JSON.stringify({
-                query: `
-            {
-            user {
-            login
-            }
-            }`})
+                query: QUERY
+        })
         })
         if (!response.ok) throw Error('failed to fetch data user login ')
         const result = await response.json();
         console.log("User login fetched:", result);
-        return result.data;
+        
+        return result;
     } catch (error) {
         console.error("Error fetching user login:", error);
         throw error;

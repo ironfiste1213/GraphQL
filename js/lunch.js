@@ -1,6 +1,7 @@
 import { renderLogin } from "./ui/auth.js";
 import { handellogin } from "./auth.js";
 import { renderProfile } from "./ui/profile.js";
+import { fetchlogin } from "./query.js";
 import { gettoken, savetoken, isValid } from "./jwt.js";
 
 
@@ -27,7 +28,8 @@ export async function initializeApp() {
                 const tokenResponse = await handellogin(emailInput.value, passwordInput.value);
                 savetoken(tokenResponse);
                 console.log("Login successful, token saved.", tokenResponse);
-                 renderProfile();
+                const datauser = await fetchlogin();
+                 renderProfile(datauser);
             } catch (error) {
                 console.error("Login failed in lunch.js:", error);
                 alert("Login failed: " + error.message);
