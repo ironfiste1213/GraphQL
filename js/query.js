@@ -17,10 +17,11 @@ export async function fetchlogin() {
         })
         if (!response.ok) throw Error('failed to fetch data user login ')
         const result = await response.json();
-    userData = 
     
         console.log("DEBUG: User login fetched:", result);
         const user = result.data.user[0];
+        console.log("DEBUG: USER OBJECT AFTER THR FETCHING", user);
+        
         console.log("DEBUG: userlogin--->",user.login);
 
         console.log("DEBUG: Setting userData properties");
@@ -32,7 +33,7 @@ export async function fetchlogin() {
         console.log("DEBUG: userData.lastName set to:", userData.lastName);
         userData.email = user.email;
         console.log("DEBUG: userData.email set to:", userData.email);
-        // userData.auditRatio = parseFloat(user.auditRatio).toFixed(1);
+         userData.auditRatio = parseFloat(user.auditRatio).toFixed(1);
         userData.totalUp = user.totalUp;
         console.log("DEBUG: userData.totalUp set to:", userData.totalUp);
         userData.totalDown = user.totalDown;
@@ -41,7 +42,8 @@ export async function fetchlogin() {
         console.log("DEBUG: userData.projects set to:", userData.projects);
         userData.projectCount = user.finished_projects.length;
         console.log("DEBUG: userData.projectCount set to:", userData.projectCount);
-        // userData.formattedXP = Utils.formatXP(user.transactions_aggregate.aggregate.sum.amount);
+        userData.totalXP = user.transactions_aggregate.aggregate.sum.amount;
+        console.log("DEBUG: userData.totalXP set to:", userData.totalXP);
         console.log("DEBUG: userData fully populated", userData);
         return result;
     } catch (error) {
