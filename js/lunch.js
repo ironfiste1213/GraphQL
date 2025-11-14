@@ -1,6 +1,6 @@
 import { renderLogin } from "./ui/auth.js";
+import { renderDashboardLayout } from "./ui/dashboard.js";
 import { handellogin } from "./auth.js";
-import { renderProfile } from "./ui/profile.js";
 import { fetchlogin } from "./query.js";
 import { gettoken, savetoken, isValid } from "./jwt.js";
 
@@ -8,16 +8,10 @@ export async function initializeApp() {
   console.log("Initializing application...");
   const token = gettoken();
   if (isValid(token)) {
-    console.log("Valid token found, proceeding to profile rendering.");
-    // Token is valid, render profile
-
-    console.log("fetchdata user from init");
-
+    console.log("Valid token found, proceeding to dashboard rendering.");
+    // Token is valid, fetch user data and render dashboard
     await fetchlogin();
-    console.log("-----------renderLogin from initi");
-
-    renderProfile();
-    // await renderProfile();
+    renderDashboardLayout();
   } else {
     console.log("No valid token found, rendering login.");
     renderLogin();
@@ -36,8 +30,9 @@ export async function initializeApp() {
         );
         savetoken(tokenResponse);
         console.log("Login successful, token saved.", tokenResponse);
-        fetchlogin();
-        renderProfile();
+        // Fetch user data and render dashboard
+        await fetchlogin();
+        renderDashboardLayout();
       } catch (error) {
         console.error("Login failed in lunch.js:", error);
         alert("Login failed: " + error.message);
