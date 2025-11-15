@@ -13,11 +13,51 @@ export function renderProfile(container) {
   const titleCard = document.createElement('div');
   titleCard.classList.add('title-card');
 
+  const titleTopRow = document.createElement('div');
+  titleTopRow.classList.add('title-top-row');
+
+  const titleContainer = document.createElement('div');
+  titleContainer.classList.add('title-container');
+
   const title = document.createElement('h1');
   title.textContent = toTitleCase('profile');
-  titleCard.appendChild(title);
+  titleContainer.appendChild(title);
+
+  const description = document.createElement('p');
+  description.classList.add('page-description');
+  description.textContent = "Your profile looks cool, but real skill isn't on the screen — it’s in what you actually build.";
+  titleContainer.appendChild(description);
+
+  titleTopRow.appendChild(titleContainer);
+
+  // Panel Grid next to title
+  const panelGrid = document.createElement('div');
+  panelGrid.classList.add('title-panel-grid');
+  panelGrid.id = 'title-panel-grid';
+
+  // Create 90 cells
+  for (let i = 0; i < 90; i++) {
+    const cell = document.createElement('div');
+    cell.classList.add('grid-cell');
+    cell.style.backgroundColor = 'black';
+    panelGrid.appendChild(cell);
+  }
+
+  titleTopRow.appendChild(panelGrid);
+
+  titleCard.appendChild(titleTopRow);
+
+  const advice = document.createElement('div');
+  advice.classList.add('page-advice');
+  advice.textContent = " Focus on becoming good, not looking good.";
+  titleCard.appendChild(advice);
 
   profileView.appendChild(titleCard);
+
+  // Import and call the styleGridByTime function
+  import('./test.js').then(module => {
+    module.styleGridByTime();
+  });
 
   const profileCard = document.createElement('div');
   profileCard.classList.add('profile-card');

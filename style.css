@@ -97,6 +97,32 @@ button:hover {
 .dashboard-layout {
     display: flex;
     height: 100vh;
+    position: relative;
+}
+
+/* Title Panel Grid */
+.title-panel-grid {
+    margin-left: 20px;
+    width: 200px;
+    height: 222px;
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    gap: 1px;
+    background-color: rgba(45, 45, 45, 0.9);
+    border: 1px solid #404040;
+    border-radius: 8px;
+    padding: 2px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.grid-cell {
+    border-radius: 50%;
+}
+
+.panel-cell {
+    border-radius: 50%;
+    transform: scale(1.15);
 }
 
 /* Sidebar Styles */
@@ -538,13 +564,62 @@ button:hover {
     box-shadow: 0 8px 25px rgba(0,0,0,0.3);
     border: 1px solid #404040;
     margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.title-top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.title-container {
+    flex: 1;
+}
+
+.page-advice {
+    margin-top: 10px;
+    font-size: 1em;
+    color: #00d4ff;
+    font-style: italic;
     text-align: center;
 }
 
+.title-top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.title-container {
+    flex: 1;
+    top : 0
+}
+
 .title-card h1 {
-    font-size: 48px;
+    font-size: 40px;
     font-weight: bold;
     color: bisque;
+    margin: 0;
+    text-align: left;
+}
+
+.page-description {
+    font-size: 16px;
+    color: #cccccc;
+    margin: 5px 0 0 0;
+    text-align: left;
+}
+
+.page-advice {
+    margin-top: 10px;
+    font-size: 1em;
+    color: #00d4ff;
+    font-style: italic;
+    text-align: center;
 }
 
 /* Charts Container */

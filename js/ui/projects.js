@@ -17,11 +17,51 @@ export function renderProjects(container) {
   const titleCard = document.createElement('div');
   titleCard.classList.add('title-card');
 
+  const titleTopRow = document.createElement('div');
+  titleTopRow.classList.add('title-top-row');
+
+  const titleContainer = document.createElement('div');
+  titleContainer.classList.add('title-container');
+
   const title = document.createElement('h1');
   title.textContent = toTitleCase('projects');
-  titleCard.appendChild(title);
+  titleContainer.appendChild(title);
+
+  const description = document.createElement('p');
+  description.classList.add('page-description');
+  description.textContent = "Projects: where you think you’re done, then the errors prove otherwise. Keep going — that’s how you grow.";
+  titleContainer.appendChild(description);
+
+  titleTopRow.appendChild(titleContainer);
+
+  // Panel Grid next to title
+  const panelGrid = document.createElement('div');
+  panelGrid.classList.add('title-panel-grid');
+  panelGrid.id = 'title-panel-grid';
+
+  // Create 90 cells
+  for (let i = 0; i < 90; i++) {
+    const cell = document.createElement('div');
+    cell.classList.add('grid-cell');
+    cell.style.backgroundColor = 'black';
+    panelGrid.appendChild(cell);
+  }
+
+  titleTopRow.appendChild(panelGrid);
+
+  titleCard.appendChild(titleTopRow);
+
+  const advice = document.createElement('div');
+  advice.classList.add('page-advice');
+  advice.textContent = " Finish what you start, even if it hurts your brain a bit.";
+  titleCard.appendChild(advice);
 
   projectsView.appendChild(titleCard);
+
+  // Import and call the styleGridByTime function
+  import('./test.js').then(module => {
+    module.styleGridByTime();
+  });
 
   if (userData.projects && userData.projects.length > 0) {
     const projectsGrid = document.createElement('div');

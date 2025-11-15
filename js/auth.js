@@ -1,5 +1,4 @@
 import { Api } from "./api.js";
-import { renderLogin } from "./ui/auth.js";
 import { removetoken } from "./jwt.js";
 import { initializeApp } from "./lunch.js";
 console.log("Auth.js loaded");
