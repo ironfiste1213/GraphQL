@@ -168,7 +168,7 @@ button:hover {
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 5px;
-    color:linear-gradient(135deg, #1a1c1d 0%, #000000 100%)
+    color: #00d4ff;
 }
 
 
@@ -458,6 +458,7 @@ button:hover {
     box-shadow: 0 8px 25px rgba(0,0,0,0.3);
     border: 1px solid #404040;
     margin-bottom: 30px;
+    margin-top: 10px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -559,11 +560,12 @@ button:hover {
 /* Title Card Styles */
 .title-card {
     background: linear-gradient(135deg, #2d2d2d 0%, #3d3d3d 100%);
-    padding: 25px;
+    padding: 0px;
+    padding-left: 5px;
     border-radius: 12px;
     box-shadow: 0 8px 25px rgba(0,0,0,0.3);
     border: 1px solid #404040;
-    margin-bottom: 30px;
+    margin-bottom: 0px;
     display: flex;
     flex-direction: column;
 }
@@ -616,6 +618,7 @@ button:hover {
 
 .page-advice {
     margin-top: 10px;
+    margin-bottom: 10px;
     font-size: 1em;
     color: #00d4ff;
     font-style: italic;
