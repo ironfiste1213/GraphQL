@@ -1,5 +1,5 @@
 import { renderLogin } from "./ui/auth.js";
-import { renderDashboardLayout } from "./ui/dashboard.js";
+import { renderDashboardLayout } from "./viewFunctions/dashboard.js";
 import { handellogin } from "./auth.js";
 import { fetchlogin } from "./query.js";
 import { gettoken, savetoken, isValid } from "./jwt.js";
@@ -7,13 +7,23 @@ import { gettoken, savetoken, isValid } from "./jwt.js";
 export async function initializeApp() {
   console.log("Initializing application...");
   const token = gettoken();
+  const currentPath = window.location.hash
+    ? window.location.hash.slice(1)
+    : "";
+
   if (isValid(token)) {
     console.log("Valid token found, proceeding to dashboard rendering.");
+    if (!currentPath || currentPath === "/login") {
+      window.location.hash = "/dashboard";
+    }
     // Token is valid, fetch user data and render dashboard
     await fetchlogin();
     renderDashboardLayout();
   } else {
     console.log("No valid token found, rendering login.");
+    if (currentPath !== "/login") {
+      window.location.hash = "/login";
+    }
     renderLogin();
     const form = document.getElementById("login-form");
     console.log("Login form retrieved:", form ? "found" : "not found");
@@ -30,6 +40,7 @@ export async function initializeApp() {
         );
         savetoken(tokenResponse);
         console.log("Login successful, token saved.", tokenResponse);
+        window.location.hash = "/dashboard";
         // Fetch user data and render dashboard
         await fetchlogin();
         renderDashboardLayout();

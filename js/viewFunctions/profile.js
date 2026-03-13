@@ -55,7 +55,7 @@ export function renderProfile(container) {
   profileView.appendChild(titleCard);
 
   // Import and call the styleGridByTime function
-  import('./test.js').then(module => {
+  import('../ui/test.js').then(module => {
     module.styleGridByTime();
   });
 

@@ -39,13 +39,14 @@ export function renderSidebar() {
   navList.classList.add('sidebar-nav-list');
 
   const links = [
-    { name: 'Dashboard', path: 'dashboard', icon: '🏠' },
-    { name: 'Projects', path: 'projects', icon: '📁' },
-    { name: 'Audits', path: 'audits', icon: '🔍' },
-    { name: 'Profile', path: 'profile', icon: '👤' },
+    { name: 'Dashboard', path: '/dashboard', icon: '🏠' },
+    { name: 'Projects', path: '/projects', icon: '📁' },
+    { name: 'Audits', path: '/audits', icon: '🔍' },
+    { name: 'Profile', path: '/profile', icon: '👤' },
   ];
 
   links.forEach(link => {
+
     const li = document.createElement('li');
     li.classList.add('sidebar-nav-item');
 
@@ -53,8 +54,10 @@ export function renderSidebar() {
     a.href = `#${link.path}`;
     a.classList.add('sidebar-nav-link');
     // Check if current hash matches the link path
-    const currentHash = window.location.hash.slice(1) || 'dashboard';
-    if (currentHash === link.path) {
+    const currentPath = window.location.hash
+      ? window.location.hash.slice(1)
+      : '/dashboard';
+    if (currentPath === link.path) {
       a.classList.add('active');
     }
 
@@ -67,8 +70,12 @@ export function renderSidebar() {
     text.classList.add('sidebar-nav-text');
     text.textContent = link.name;
     a.appendChild(text);
-
+    
     a.addEventListener('click', (e) => {
+      console.log("Sidebar.js loadeddddd");
+
+      console.log('eeeeee');
+      
       e.preventDefault();
       router.navigate(link.path);
       // Update active class

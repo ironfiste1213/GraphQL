@@ -1,5 +1,5 @@
 import { userData } from "../api.js";
-import { renderSidebar } from "./sidebar.js";
+import { renderSidebar } from "../ui/sidebar.js";
 import { router } from "../router.js";
 import { renderDashboard as renderDashboardView } from "./dashboard.js";
 import { renderProjects } from "./projects.js";
@@ -34,10 +34,10 @@ export function renderDashboardLayout() {
 
   // Set up router
   router.setMainContent(main);
-  router.addRoute('dashboard', renderDashboardView);
-  router.addRoute('projects', renderProjects);
-  router.addRoute('audits', renderAudits);
-  router.addRoute('profile', renderProfile);
+  router.addRoute('/dashboard', renderDashboardView);
+  router.addRoute('/projects', renderProjects);
+  router.addRoute('/audits', renderAudits);
+  router.addRoute('/profile', renderProfile);
   router.init();
 
   // Update sidebar active state after router init
@@ -93,7 +93,7 @@ export function renderDashboard(container) {
   dashboard.appendChild(titleCard);
 
   // Import and call the styleGridByTime function
-  import('./test.js').then(module => {
+  import('../ui/test.js').then(module => {
     module.styleGridByTime();
   });
 
