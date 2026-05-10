@@ -1,5 +1,5 @@
 import { Api, QUERY, userData } from "./api.js";
-import { gettoken } from "./jwt.js";
+import { gettoken, getUserIdFromToken } from "./jwt.js";
 export async function fetchlogin() {
     const Token = gettoken();
     try {
@@ -29,7 +29,8 @@ export async function fetchlogin() {
         console.log("DEBUG: userlogin--->",user.login);
 
         console.log("DEBUG: Setting userData properties");
-        userData.id = user.id;
+        userData.id = getUserIdFromToken(Token);
+        console.log("DEBUG: userData.id extracted from JWT:", userData.id);
         userData.userName = user.login;
         console.log("DEBUG: userData.userName set to:", userData.userName);
         userData.firstName = user.firstName;

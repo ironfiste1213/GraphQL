@@ -42,3 +42,20 @@ export function isValid(token) {
     return false;
   }
 }
+
+export function getUserIdFromToken(token) {
+  console.log("Extracting user ID from JWT");
+  if (!token) {
+    console.log("No token provided");
+    return null;
+  }
+  try {
+    const payload = JSON.parse(atob(token.split(".")[1]));
+    const userId = payload.sub;
+    console.log("User ID extracted from JWT:", userId);
+    return userId;
+  } catch (error) {
+    console.log("Error extracting user ID from token:", error);
+    return null;
+  }
+}

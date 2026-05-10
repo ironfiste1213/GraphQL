@@ -1,4 +1,5 @@
 import { logout } from "../auth.js";
+import { createErrorDiv } from "./errorComponent.js";
 console.log("UI/Auth.js loaded");
 
 const appDiv = document.getElementById("app");
@@ -64,8 +65,7 @@ export function renderLogin() {
   form.appendChild(submitButton);
   console.log("Submit button added to form");
 
-  const errorDiv = document.createElement("div");
-  errorDiv.id = "error-message";
+  const errorDiv = createErrorDiv("error-message");
   loginForm.appendChild(errorDiv);
   console.log("Error div added to login form");
 

@@ -3,6 +3,7 @@ import { renderDashboardLayout } from "./viewFunctions/dashboard.js";
 import { handellogin } from "./auth.js";
 import { fetchlogin } from "./query.js";
 import { gettoken, savetoken, isValid } from "./jwt.js";
+import { showError } from "./ui/errorComponent.js";
 
 export async function initializeApp() {
   console.log("Initializing application...");
@@ -46,7 +47,8 @@ export async function initializeApp() {
         renderDashboardLayout();
       } catch (error) {
         console.error("Login failed in lunch.js:", error);
-        alert("Login failed: " + error.message);
+        const errorDiv = document.getElementById("error-message");
+        showError(errorDiv, "Login failed: " + error.message);
       }
     });
   }
