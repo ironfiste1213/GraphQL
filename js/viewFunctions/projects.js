@@ -68,7 +68,19 @@ export function renderProjects(container) {
     projectsGrid.classList.add('projects-grid');
 
     // Sort projects from newest to oldest
-    userData.projects.sort((a, b) => new Date(b.group.createdAt) - new Date(a.group.createdAt));
+    userData.projects.sort((a, b) => new Date(b.group?.createdAt) - new Date(a.group?.createdAt));
+
+    // Dedup projects (GraphQL can return the same group multiple times)
+    const seenProjectIds = new Set();
+    userData.projects = userData.projects.filter(p => {
+      const group = p.group;
+      const id = group?.id || group?.path;
+      if (!id) return false;
+      if (seenProjectIds.has(id)) return false;
+      seenProjectIds.add(id);
+      return true;
+    });
+
 
     userData.projects.forEach(project => {
       if (!project.group) return; // Skip if group is null
@@ -106,18 +118,24 @@ export function renderProjects(container) {
       const membersList = document.createElement('div');
       membersList.classList.add('members-list');
 
+      // Client-side dedupe: GraphQL can sometimes return repeated member rows
+      const seenMemberLogins = new Set();
       project.group.members.forEach(member => {
+        const login = member?.userLogin;
+        if (!login || seenMemberLogins.has(login)) return;
+        seenMemberLogins.add(login);
+
         const memberDiv = document.createElement('div');
         memberDiv.classList.add('member');
 
         const avatar = document.createElement('img');
-        avatar.src = member.user.avatarUrl || 'default-avatar.png'; // Fallback if no avatar
-        avatar.alt = `${member.userLogin} avatar`;
+        avatar.src = member.user?.avatarUrl || 'default-avatar.png'; // Fallback if no avatar
+        avatar.alt = `${login} avatar`;
         avatar.classList.add('member-avatar');
         memberDiv.appendChild(avatar);
 
         const name = document.createElement('span');
-        name.textContent = member.userLogin;
+        name.textContent = login;
         name.classList.add('member-name');
         memberDiv.appendChild(name);
 
